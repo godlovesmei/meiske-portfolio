@@ -1,0 +1,183 @@
+/* HUD Styles */
+.hud-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Let clicks pass through */
+  z-index: 50;
+}
+
+/* Minimap */
+.hud-minimap {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  width: 100px;
+  height: 100px;
+}
+
+.minimap-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(10, 10, 15, 0.8);
+  border: 3px solid #333;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.minimap-border {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  border: 2px solid var(--neon-cyan);
+  pointer-events: none;
+}
+
+.minimap-radar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 2px;
+  background: var(--success);
+  transform-origin: 0 50%;
+  animation: scan 4s linear infinite;
+  box-shadow: 0 0 10px var(--success);
+}
+
+.minimap-blip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: var(--neon-pink);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px var(--neon-pink);
+  animation: pulse 2s infinite;
+}
+
+.location-text {
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0px #000;
+  white-space: nowrap;
+}
+
+@keyframes scan {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Wanted Level */
+.hud-wanted {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.wanted-stars {
+  font-size: 2.5rem;
+  color: #333; /* empty star color */
+  letter-spacing: 5px;
+  display: flex;
+  gap: 5px;
+}
+
+.star {
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
+.star.filled {
+  color: var(--text-primary);
+  text-shadow: 0 0 15px #fff;
+  animation: starPulse 1.5s infinite alternate;
+}
+
+@keyframes starPulse {
+  from { opacity: 0.8; text-shadow: 0 0 5px #fff; }
+  to { opacity: 1; text-shadow: 0 0 20px #fff; }
+}
+
+.wanted-label {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  margin-top: -5px;
+}
+
+/* Mission Objective */
+.hud-mission {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  max-width: 300px;
+  pointer-events: auto; /* Allow interaction if needed */
+  background: rgba(20, 20, 25, 0.9);
+  border-left: 4px solid var(--neon-yellow);
+  padding: 15px;
+}
+
+.mission-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 5px;
+}
+
+.mission-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .hud-minimap {
+    width: 80px;
+    height: 80px;
+    bottom: 20px;
+    left: 20px;
+  }
+  
+  .location-text {
+    font-size: 0.9rem;
+    bottom: -20px;
+  }
+
+  .hud-wanted {
+    top: 20px;
+    right: 20px;
+  }
+
+  .wanted-stars {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+  
+  .wanted-label {
+    font-size: 1rem;
+  }
+
+  .hud-mission {
+    display: none; /* Hide on mobile to save space */
+  }
+}
