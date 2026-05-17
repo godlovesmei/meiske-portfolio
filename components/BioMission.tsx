@@ -1,17 +1,21 @@
+"use client";
 import React from 'react';
+import { useReveal } from '../hooks/useReveal';
 import './biomission.css';
 
 const BioMission = () => {
+  const { ref, visible } = useReveal(0.2);
+
   return (
-    <section className="bio-section">
-      <div className="mission-container clip-diagonal">
+    <section className="bio-section" ref={ref}>
+      <div className={`mission-container clip-diagonal reveal-left ${visible ? 'visible' : ''}`}>
         <div className="mission-header">
           <h2 className="neon-text-pink">MISSION DOSSIER</h2>
           <div className="status-badge">ACTIVE</div>
         </div>
-        
+
         <div className="mission-body">
-          <div className="stats-grid">
+          <div className={`stats-grid stagger-children ${visible ? 'visible' : ''}`}>
             <div className="stat-box">
               <div className="stat-label">CLASS</div>
               <div className="stat-value neon-text-cyan">INFORMATICS</div>
@@ -25,8 +29,8 @@ const BioMission = () => {
               <div className="stat-value">AI / SWE</div>
             </div>
           </div>
-          
-          <div className="bio-text">
+
+          <div className={`bio-text reveal-up ${visible ? 'visible' : ''}`}>
             <p>
               I spend most of my time experimenting with ideas, building projects, and continuously improving my technical skills.
             </p>

@@ -1,0 +1,59 @@
+/* =================== LOADING SCREEN =================== */
+.loader-container {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader-container.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-logo {
+    font-family: var(--font-heading), sans-serif;
+    font-size: 48px;
+    letter-spacing: 5px;
+    color: var(--neon-cyan);
+    animation: loaderPulse 1s infinite;
+}
+
+@keyframes loaderPulse {
+    0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--neon-cyan); }
+    50% { opacity: 0.5; text-shadow: none; }
+}
+
+.loader-bar {
+    width: 200px;
+    height: 3px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.loader-bar-fill {
+    height: 100%;
+    background: var(--neon-pink);
+    width: 0;
+    animation: loaderFill 2s ease forwards;
+}
+
+@keyframes loaderFill {
+    to { width: 100%; }
+}
+
+.loader-text {
+    font-family: var(--font-body), sans-serif;
+    font-size: 14px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
