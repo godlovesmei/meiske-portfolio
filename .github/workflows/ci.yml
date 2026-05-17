@@ -9,8 +9,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     
     steps:
     - uses: actions/checkout@v4
@@ -19,11 +17,12 @@ jobs:
       uses: pnpm/action-setup@v4
       with:
         version: 9
+        run_install: false
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '24'
+        node-version: '20'
         cache: 'pnpm'
           
     - name: Install dependencies
