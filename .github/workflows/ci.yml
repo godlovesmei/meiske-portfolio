@@ -23,17 +23,6 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20'
-        cache: 'pnpm'  # Tambahkan cache untuk mempercepat
-    
-    # DEBUG: Cek apakah package.json dan pnpm-workspace.yaml ada
-    - name: Verify project files
-      run: |
-        echo "=== Root files ==="
-        ls -la
-        echo "=== package.json ==="
-        cat package.json || echo "❌ package.json missing"
-        echo "=== pnpm-workspace.yaml ==="
-        cat pnpm-workspace.yaml || echo "⚠️ pnpm-workspace.yaml missing (bukan workspace?)"
 
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
