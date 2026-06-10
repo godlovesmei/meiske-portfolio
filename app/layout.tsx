@@ -1,22 +1,7 @@
 import type { Metadata } from "next";
-import { Russo_One, Rajdhani } from "next/font/google";
 import "./globals.css";
 import Loader from "../components/Loader";
 import Nav from "../components/Nav";
-
-const russoOne = Russo_One({
-  variable: "--font-russo-one",
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const rajdhani = Rajdhani({
-  variable: "--font-rajdhani",
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://meiske.dev'),
@@ -51,7 +36,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${russoOne.variable} ${rajdhani.variable}`}>
+    <html lang="en">
       <body className="antialiased">
         <Loader />
         <div className="cursor-glow" id="cursor-glow" />

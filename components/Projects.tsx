@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { useReveal } from '../hooks/useReveal';
 import './projects.css';
 
@@ -10,6 +11,8 @@ const allProjects = [
     category: 'AI/ML',
     desc: <>Signify AI is a real-time Indonesian Sign Language (BISINDO) recognition web application that translates hand gestures into text directly in the browser. Built with Next.js and FastAPI, the system captures webcam frames on the frontend and performs inference using a fine-tuned YOLO11 object detection model on the backend. Achieved <strong>95% accuracy</strong> and <strong>&lt;130ms real-time latency</strong>.</>,
     tech: 'Next.js // FastAPI // YOLO11',
+    image: '/pbl-sems4.png',
+    imageAlt: 'Signify AI project cover',
     github: 'https://github.com/godlovesmei/signify-ai',
     demo: '#'
   },
@@ -19,6 +22,8 @@ const allProjects = [
     category: 'AI/ML',
     desc: <>AlgoFun is an AI-powered educational web application built with Laravel and FastAPI that helps elementary school students improve logical and algorithmic thinking through interactive learning content. The system integrates a <strong>production-ready Retrieval-Augmented Generation (RAG) pipeline</strong>.</>,
     tech: 'Laravel // FastAPI // RAG',
+    image: '/pbl-sems3.png',
+    imageAlt: 'AlgoFun project cover',
     github: 'https://github.com/choccoo4/algofun',
     demo: 'https://youtu.be/yVI56K7BMmE?si=4_BlborjIg-Qn50s'
   },
@@ -28,6 +33,8 @@ const allProjects = [
     category: 'WEB',
     desc: 'Venus Cars is a car marketplace platform built with Laravel that provides a modern and user-friendly experience for buyers and sellers. Features various car categories, search and filtering, user authentication, direct communication, and transaction support for both cash and credit payments.',
     tech: 'Laravel // MySQL',
+    image: '/pbl-sems2.png',
+    imageAlt: 'Venus Cars project cover',
     github: 'https://github.com/godlovesmei/PBL_Kelp3_IF2A_Pagi',
     demo: 'https://youtu.be/90eOflVbOpo?si=0be726b5FgLSk8Kz'
   },
@@ -37,6 +44,8 @@ const allProjects = [
     category: 'WEB',
     desc: 'PureBeauty is a skincare e-commerce platform built with native PHP that allows customers to search, filter, and purchase products. The system includes user authentication, product CRUD operations, category-based search and filtering, automated feedback responses, and responsive interface.',
     tech: 'PHP // MySQL',
+    image: '/pbl-sems1.png',
+    imageAlt: 'PureBeauty project cover',
     github: '#',
     demo: 'https://youtu.be/ISdzcMD1hGY?si=cvIun0p0pVqWpUj8'
   }
@@ -61,7 +70,7 @@ const ProjectCard = ({ project, index }: { project: typeof allProjects[0]; index
 
   return (
     <div
-      className="project-card clip-cyber"
+      className={`project-card clip-cyber ${isExpanded ? 'expanded' : ''}`}
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -71,6 +80,14 @@ const ProjectCard = ({ project, index }: { project: typeof allProjects[0]; index
       }}
     >
       <div className="project-thumbnail">
+        <Image
+          src={project.image}
+          alt={project.imageAlt}
+          fill
+          sizes="(max-width: 768px) 85vw, (max-width: 1200px) 45vw, 25vw"
+          className="project-cover-image"
+          loading="eager"
+        />
         <div className="thumb-gradient" />
         <span className="project-category">{project.category}</span>
       </div>
@@ -148,13 +165,13 @@ const Projects = () => {
     carouselRef.current.scrollTo({ left: cardWidth * index, behavior: 'smooth' });
   };
 
-  // FIXED: Reset index saat filter berubah
-  useEffect(() => {
+  const handleFilterChange = (cat: string) => {
+    setFilter(cat);
     setMobileIndex(0);
     if (carouselRef.current) {
       carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
     }
-  }, [filter]);
+  };
 
   return (
     <section className="projects-section" ref={ref}>
@@ -168,7 +185,7 @@ const Projects = () => {
           <button
             key={cat}
             className={`filter-btn ${filter === cat ? 'active' : ''}`}
-            onClick={() => setFilter(cat)}
+            onClick={() => handleFilterChange(cat)}
           >
             {cat}
           </button>

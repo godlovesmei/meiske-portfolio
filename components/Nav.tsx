@@ -9,7 +9,6 @@ const labels = ['HOME', 'BIO', 'PROJECTS', 'TECH', 'CONTACT'];
 const Nav = () => {
     const active = useActiveSection(sections);
     const [scrolled, setScrolled] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 80);
@@ -21,7 +20,6 @@ const Nav = () => {
         const el = document.getElementById(id);
         if (el) {
             el.scrollIntoView({ behavior: 'smooth' });
-            setMobileMenuOpen(false);
         }
     };
 
