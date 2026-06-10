@@ -1,14 +1,18 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
+
+const gotoReadyHome = async (page: Page) => {
+  await page.goto('/');
+  await expect(page.locator('.loader-container')).toBeHidden({ timeout: 7_000 });
+};
 
 test.describe('Core Features & Terminal Interaction', () => {
-  test('should execute terminal commands successfully', async ({ page }) => {
-    await page.goto('/');
-    
-    // Scroll to contact section to make terminal visible
-    await page.click('text=CONTACT');
-    
-    // Wait for the terminal to be in viewport
-    const terminalInput = page.locator('.terminal-input');
+  test('should execute terminal commands successfully', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'Interactive terminal is intentionally replaced by action cards on mobile.');
+
+    await gotoReadyHome(page);
+
+    const terminalInput = page.getByRole('textbox');
+    await terminalInput.scrollIntoViewIfNeeded();
     await expect(terminalInput).toBeVisible();
 
     // Test 'whoami' command
@@ -23,17 +27,14 @@ test.describe('Core Features & Terminal Interaction', () => {
   });
 
   test('should expand project cards when READ MORE is clicked', async ({ page }) => {
-    await page.goto('/');
-    
-    // Scroll to projects
-    await page.click('text=PROJECTS');
-    
-    // Find the first "READ MORE" button and click it
-    const readMoreBtn = page.locator('text=[ READ MORE ]').first();
+    await gotoReadyHome(page);
+
+    const readMoreBtn = page.getByRole('button', { name: '[ READ MORE ]' }).first();
+    await readMoreBtn.scrollIntoViewIfNeeded();
     await expect(readMoreBtn).toBeVisible();
     await readMoreBtn.click();
 
     // Verify it changes to COLLAPSE
-    await expect(page.locator('text=[ COLLAPSE ]').first()).toBeVisible();
+    await expect(page.getByRole('button', { name: '[ COLLAPSE ]' }).first()).toBeVisible();
   });
 });
