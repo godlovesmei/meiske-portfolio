@@ -36,7 +36,7 @@ const allProjects = [
     image: '/pbl-sems2.png',
     imageAlt: 'Venus Cars project cover',
     github: 'https://github.com/godlovesmei/PBL_Kelp3_IF2A_Pagi',
-    demo: 'https://youtu.be/90eOflVbOpo?si=0be726b5FgLSk8Kz'
+    demo: 'https://venuscars.vercel.app/home'
   },
   {
     id: 4,
