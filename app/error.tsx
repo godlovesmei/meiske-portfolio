@@ -4,10 +4,10 @@ import { useEffect } from 'react';
 
 export default function Error({
   error,
-  reset,
+  unstable_retry,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  unstable_retry: () => void;
 }) {
   useEffect(() => {
     // Log the error to an error reporting service if needed
@@ -34,7 +34,7 @@ export default function Error({
         <span style={{ color: '#a0a0a0', fontSize: '0.8rem' }}>{error.message || 'Unknown Error'}</span>
       </p>
       <button
-        onClick={() => reset()}
+        onClick={() => unstable_retry()}
         style={{
           background: 'transparent',
           border: '1px solid #00e5ff',

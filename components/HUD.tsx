@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useActiveSection } from '../hooks/useReveal';
 import './hud.css';
 
@@ -14,9 +14,25 @@ const sectionLabels: Record<string, string> = {
 
 const HUD = () => {
   const active = useActiveSection(sections);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0) {
+        setProgress(Math.min((scrollTop / docHeight) * 100, 100));
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <div className="hud-container">
+      {/* Scroll Progress Bar */}
+      <div className="hud-scroll-progress" style={{ width: `${progress}%` }} />
+
       {/* Desktop Minimap */}
       <div className="hud-minimap">
         <div className="minimap-circle">

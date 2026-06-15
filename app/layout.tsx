@@ -1,7 +1,22 @@
 import type { Metadata } from "next";
+import { Russo_One, Rajdhani } from "next/font/google";
 import "./globals.css";
 import Loader from "../components/Loader";
 import Nav from "../components/Nav";
+
+const russoOne = Russo_One({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-heading',
+  display: 'swap',
+});
+
+const rajdhani = Rajdhani({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-body',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://meiske.dev'),
@@ -32,12 +47,32 @@ export const metadata: Metadata = {
   }
 };
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Meiske Sahertian',
+  url: 'https://meiske.dev',
+  image: 'https://meiske.dev/profile.jpeg',
+  jobTitle: 'AI & Software Engineer',
+  description: 'Informatics student at Batam State Polytechnic specializing in AI, SWE, and scalable systems.',
+  sameAs: [
+    'https://github.com/godlovesmei',
+    'https://www.linkedin.com/in/meiskesahertian/',
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${russoOne.variable} ${rajdhani.variable}`}>
       <body className="antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+          }}
+        />
         <Loader />
         <div className="cursor-glow" id="cursor-glow" />
         <Nav />

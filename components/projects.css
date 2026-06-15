@@ -184,6 +184,7 @@
   margin-bottom: 10px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -192,6 +193,7 @@
 
 .project-desc.expanded {
   -webkit-line-clamp: unset;
+  line-clamp: unset;
 }
 
 .read-more-btn {
@@ -313,7 +315,7 @@
     scroll-behavior: smooth;
     gap: 16px;
     padding-bottom: 10px;
-    height: 520px;
+    min-height: 420px;
     align-items: stretch;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -326,7 +328,7 @@
   .project-card {
     min-width: 85vw;
     max-width: 85vw;
-    height: 100%;
+    min-height: 100%;
     scroll-snap-align: center;
     flex-shrink: 0;
     display: flex;
@@ -367,6 +369,7 @@
     padding: 0 20px;
     margin-bottom: 8px;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     font-size: 0.9rem;
     line-height: 1.5;
     flex-shrink: 0;
@@ -375,6 +378,7 @@
   /* FIXED: expanded di mobile benar-benar melepas clamp */
   .project-desc.expanded {
     -webkit-line-clamp: unset;
+    line-clamp: unset;
     display: block;
   }
 
@@ -405,7 +409,7 @@
 /* Small mobile */
 @media (max-width: 480px) {
   .projects-grid {
-    height: 480px;
+    min-height: 380px;
   }
 
   .project-thumbnail {
